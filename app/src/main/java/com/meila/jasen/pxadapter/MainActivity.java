@@ -4,18 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.math.BigDecimal;
 
 
@@ -159,10 +152,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 //            bw.flush();
 //            bw.close();
 
-            FileOutputStream fout =openFileOutput(fileName, MODE_PRIVATE);
+            FileOutputStream fileOs =openFileOutput(fileName, MODE_PRIVATE);
             byte [] bytes = st.getBytes();
-            fout.write(bytes);
-            fout.close();
+            fileOs.write(bytes);
+            fileOs.close();
 
         } catch (IOException e) {
             e.printStackTrace();
