@@ -3,10 +3,13 @@ package com.meila.jasen.pxadapter;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -18,16 +21,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private TextView widthText;
     private TextView dpiText;
     private Button adapterButton;
-    private static String fileName = "px_dimens.xml";
     private static String folderName;
-    private static String filePath = "./res/values-xhdpi-1920x1080/px_dimens.xml";
+    private static String folderPath;
+    private static final String FILE_NAME = "px_dimens.xml";
+    private static final String SDCARD_PATH = Environment.getExternalStorageDirectory().getAbsolutePath();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        folderName = "values-xhdpi-1920x1080";
         initViews();
         setListener();
 
@@ -40,6 +43,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         heightText.setText(" " + Integer.toString(screenHeight) + "px");
         widthText.setText(" " + Integer.toString(screenWidth) + "px");
         dpiText.setText(" " + Integer.toString(screenDpi) + getDpiLevel(screenDpi));
+
+        //根据设备dpi生成相应的文件夹
+        folderName = "values" + getDpiLevel(screenDpi) + "-" + Integer.toString(screenHeight) + "x" + Integer.toString(screenWidth);
     }
 
     /**
@@ -68,7 +74,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.adapter_button:
                 String dimens = getAllDimens();
-                writeFile(filePath, dimens);
+                writeFile(dimens);
                 break;
         }
     }
@@ -88,8 +94,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
             dpiLevel = "-hdpi";
         } else if (screenDpi < 480) {
             dpiLevel = "-xhdpi";
-        } else {
+        } else if (screenDpi < 640) {
             dpiLevel = "-xxhdpi";
+        } else {
+            dpiLevel = "-xxxhdpi";
         }
         return dpiLevel;
     }
@@ -98,9 +106,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
      * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
      */
     public float pxToDip(Context context, float pxValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
+        final float scale = context.getResources().getDisplayMetrics().densityDpi;
         System.out.print("------------------" + scale + "------------------");
-        float dpValue = pxValue / scale + 0.5f;
+        float dpValue = (pxValue * 160) / scale;
         BigDecimal bigDecimal = new BigDecimal(dpValue);
         float finDp = bigDecimal.setScale(4, BigDecimal.ROUND_HALF_UP).floatValue();
         return finDp;
@@ -139,20 +147,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     /**
      * 生成 "px_dimens.xml" 文件
-     * @param filePath
      * @param st
      */
-    public void writeFile(String filePath, String st) {
-//        File newFile = new File("./res/values-xhdpi-1920x1080/px_dimens.xml");
-//        FileOutputStream fileOs= null;
-        try {
-//            FileWriter fw = new FileWriter(filePath);
-//            BufferedWriter bw = new BufferedWriter(fw);
-//            bw.write(st);
-//            bw.flush();
-//            bw.close();
+    public void writeFile(String st) {
+        folderPath = SDCARD_PATH + File.separator + folderName;
+        File fileDir = new File(folderPath);
+        if (!fileDir.exists()) {
+            fileDir.mkdirs();
+        }
 
-            FileOutputStream fileOs =openFileOutput(fileName, MODE_PRIVATE);
+        try {
+
+            FileOutputStream fileOs = new FileOutputStream(folderPath + File.separator + FILE_NAME);
             byte [] bytes = st.getBytes();
             fileOs.write(bytes);
             fileOs.close();
