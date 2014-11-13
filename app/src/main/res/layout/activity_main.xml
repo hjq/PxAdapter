@@ -10,98 +10,194 @@
         android:text="@string/hello_world"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
+        android:textSize="@dimen/px_text_35"
         android:textColor="#000000"/>
 
-    <LinearLayout
-        android:id="@+id/details"
+    <RelativeLayout
+        android:id="@+id/details_group"
         android:layout_below="@+id/text"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+        <LinearLayout
+            android:id="@+id/details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/height"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ScreenHeight:"
-                android:textSize="30sp"/>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/height_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/height"
-                android:textSize="30sp"
-                android:text="1920"
-                android:textColor="#ff992a38"
-                />
+                <TextView
+                    android:id="@+id/height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/px_70"
+                    android:gravity="center"
+                    android:text="ScreenHeight:"
+                    android:textSize="@dimen/px_text_30"/>
+
+                <EditText
+                    android:id="@+id/height_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/px_70"
+                    android:gravity="center"
+                    android:layout_toRightOf="@+id/height"
+                    android:textSize="@dimen/px_text_30"
+                    android:text="1920"
+                    android:maxLength="8"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textColor="#ff992a38"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/px_70"
+                    android:gravity="center"
+                    android:layout_toRightOf="@+id/height_detail"
+                    android:text="px"
+                    android:textColor="#ff992a38"
+                    android:textSize="@dimen/px_text_30"
+                    />
 
             </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/width"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="30sp"
-                android:text="ScreenWidth:"/>
+                <TextView
+                    android:id="@+id/width"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/px_70"
+                    android:gravity="center"
+                    android:textSize="@dimen/px_text_30"
+                    android:text="ScreenWidth:"/>
 
-            <TextView
-                android:id="@+id/width_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/width"
-                android:textSize="30sp"
-                android:text="1080"
-                android:textColor="#ff992a38"
-                />
+                <EditText
+                    android:id="@+id/width_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/px_70"
+                    android:gravity="center"
+                    android:layout_toRightOf="@+id/width"
+                    android:textSize="@dimen/px_text_30"
+                    android:text="1080"
+                    android:maxLength="8"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textColor="#ff992a38"
+                    />
 
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/px_70"
+                    android:gravity="center"
+                    android:layout_toRightOf="@+id/width_detail"
+                    android:text="px"
+                    android:textSize="@dimen/px_text_30"
+                    android:textColor="#ff992a38"
+                    />
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/dpi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="30sp"
-                android:text="ScreenDpi:"/>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/dpi_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/dpi"
-                android:textSize="30sp"
-                android:text="441"
-                android:textColor="#ff992a38"
-                />
+                <TextView
+                    android:id="@+id/dpi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/px_70"
+                    android:gravity="center"
+                    android:textSize="@dimen/px_text_30"
+                    android:text="ScreenDpi:"/>
 
-        </RelativeLayout>
+                <EditText
+                    android:id="@+id/dpi_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/px_70"
+                    android:gravity="center"
+                    android:layout_toRightOf="@+id/dpi"
+                    android:textSize="@dimen/px_text_30"
+                    android:text="480"
+                    android:maxLength="12"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textColor="#ff992a38"
+                    />
+
+                <TextView
+                    android:id="@+id/dpi_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/px_70"
+                    android:gravity="center"
+                    android:layout_toRightOf="@+id/dpi_detail"
+                    android:textSize="@dimen/px_text_30"
+                    android:textColor="#ff992a38"
+                    />
+
+            </RelativeLayout>
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/reset_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/details"
+            android:layout_marginLeft="@dimen/px_50"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/px_text_30"
+            android:text="Reset"
+            />
+
+        </RelativeLayout>
+
+
+    <RadioGroup
+        android:id="@+id/tab_group"
+        android:layout_below="@+id/details_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true">
+
+        <RadioButton
+            android:id="@+id/auto_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/auto_calculate"
+            android:textSize="@dimen/px_text_30"
+            />
+
+        <RadioButton
+            android:id="@+id/hand_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hand_calculate"
+            android:textSize="@dimen/px_text_30"/>
+
+        </RadioGroup>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/details"
+        android:layout_below="@+id/tab_group"
         android:text="@string/click_tips"
+        android:textSize="@dimen/px_text_30"
         android:id="@+id/adapter_button"
         android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:id="@+id/path_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/px_text_30"
         />
 
 </RelativeLayout>
